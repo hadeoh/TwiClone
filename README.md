@@ -1,3 +1,3 @@
-[![Build Status](https://travis-ci.com/hadeoh/TwiClone.svg?branch=develop)](https://travis-ci.com/hadeoh/TwiClone) [![Maintainability](https://api.codeclimate.com/v1/badges/d09c74fc25127a7321fc/maintainability)](https://codeclimate.com/github/hadeoh/TwiClone/maintainability)
+[![Build Status](https://travis-ci.com/hadeoh/TwiClone.svg?branch=develop)](https://travis-ci.com/hadeoh/TwiClone) [![Maintainability](https://api.codeclimate.com/v1/badges/d09c74fc25127a7321fc/maintainability)](https://codeclimate.com/github/hadeoh/TwiClone/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d09c74fc25127a7321fc/test_coverage)](https://codeclimate.com/github/hadeoh/TwiClone/test_coverage)
 
 #### Getting Started
