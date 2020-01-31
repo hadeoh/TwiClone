@@ -1,0 +1,10 @@
+{
+  "name": "twiclone",
+  "version": "1.0.0",
+  "description": "A simple clone of Twitter",
+  "main": "index.js",
+  "repository": "https://github.com/hadeoh/TwiClone",
+  "author": "Usman Adio",
+  "license": "MIT",
+  "private": true
+}
