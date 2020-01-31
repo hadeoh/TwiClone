@@ -1,18 +1,18 @@
 /**
  * third party libraries
  */
-import bodyParser from "body-parser";
-import express from "express";
-import cors from "cors";
-import logger from "morgan";
-import cookieParser from "cookie-parser";
+import bodyParser from 'body-parser';
+import express from 'express';
+import cors from 'cors';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
 
 /**
  * server configuration
  */
-import config from "./config";
-import routes from "./routes";
-import { converter, notFound, handler } from "./config/error";
+import config from './config';
+import routes from './routes';
+import * as error from './config/error';
 
 /**
  * express application
@@ -30,20 +30,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // enable detailed API logging in dev env
-if (config.env === "development") {
-  app.use(logger("dev"));
+if (config.env === 'development') {
+  app.use(logger('dev'));
 }
 
 // mount all routes on root /api/v1 path
-app.use("/api/v1", routes);
+app.use('/api/v1', routes);
 
 // if error is not an instanceOf APIError, convert it.
-app.use(converter);
+app.use(error.converter);
 
 // catch 404 and forward to error handler
-app.use(notFound);
+app.use(error.notFound);
 
 // error handler, send stacktrace only during development
-app.use(handler);
+app.use(error.handler);
 
 export default app;

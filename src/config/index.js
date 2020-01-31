@@ -49,6 +49,7 @@ const config = {
   host: envVars.HOST,
   port: envVars.PORT,
   jwtSecret: envVars.JWT_SECRET,
+  bcryptSalt: envVars.BCRYPT_ROUND,
   mongoURI: process.env.NODE_ENV === 'test' ? envVars.MONGO_HOST_TEST : envVars.MONGO_HOST,
 };
 
