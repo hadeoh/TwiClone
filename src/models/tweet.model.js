@@ -29,4 +29,4 @@ TweetSchema.methods = {
  */
 TweetSchema.statics = {};
 
-export default model('User', TweetSchema);
+module.exports = model('Tweet', TweetSchema);
