@@ -1,5 +1,5 @@
-import fs from "fs";
-import Query from "./query";
+import fs from 'fs';
+import Query from './query';
 
 // get working models from working directory
 const directoryPath = `${process.cwd()}/src/models`;
@@ -15,7 +15,7 @@ const builderObject = AllModels.reduce((accumulator, file) => {
   const Model = require(`../models/${file}`);
 
   // get model name
-  const [fileName] = file.split(".");
+  const [fileName] = file.split('.');
 
   // attach query word to every model name
   const queryBuilderName = `${fileName.charAt(0).toUpperCase()}${fileName.slice(1)}Query`;
@@ -28,6 +28,5 @@ const builderObject = AllModels.reduce((accumulator, file) => {
   return accumulator;
 }, {});
 
-
 // export synched model for use on controller
-export default builderObject;
+module.exports = builderObject;
