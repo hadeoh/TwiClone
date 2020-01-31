@@ -4,7 +4,6 @@ class Query {
   constructor(Model) {
     this.Model = Model;
   }
-  
   create(payload) {
     return this.Model.create(payload);
   }
@@ -26,4 +25,4 @@ class Query {
   }
 }
 
-export default Query;
+export default Query
