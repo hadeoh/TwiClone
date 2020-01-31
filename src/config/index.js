@@ -49,10 +49,7 @@ const config = {
   host: envVars.HOST,
   port: envVars.PORT,
   jwtSecret: envVars.JWT_SECRET,
-  mongo: {
-    host: process.env.NODE_ENV === 'test' ? envVars.MONGO_HOST_TEST : envVars.MONGO_HOST,
-    port: envVars.MONGO_PORT
-  },
+  mongoURI: process.env.NODE_ENV === 'test' ? envVars.MONGO_HOST_TEST : envVars.MONGO_HOST,
 };
 
-module.exports = config;
+export default config;
