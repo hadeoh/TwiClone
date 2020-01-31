@@ -71,4 +71,4 @@ UserSchema.methods = {
  */
 UserSchema.statics = {};
 
-export default model('User', UserSchema);
+module.exports = model('User', UserSchema);

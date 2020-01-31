@@ -38,4 +38,4 @@ TweetReplySchema.methods = {
  */
 TweetReplySchema.statics = {};
 
-export default model('TweetReply', TweetReplySchema);
+module.exports = model('TweetReply', TweetReplySchema);

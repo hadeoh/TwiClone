@@ -26,4 +26,4 @@ FollowingSchema.methods = {
  */
 FollowingSchema.statics = {};
 
-export default model('Following', FollowingSchema);
+module.exports = model('Following', FollowingSchema);
