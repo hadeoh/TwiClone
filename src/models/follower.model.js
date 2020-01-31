@@ -26,4 +26,4 @@ FollowersSchema.methods = {
  */
 FollowersSchema.statics = {};
 
-export default model('User', FollowersSchema);
+export default model('Follower', FollowersSchema);
