@@ -12,7 +12,7 @@ describe('Sign Up route', () => {
         password: 'modupeola',
         confirmPassword: 'modupeola'
       })
-    expect(res.statusCode).toEqual(200)
+    expect(res.statusCode).toEqual(201)
     expect(res.body).toHaveProperty('statusCode');
     expect(res.body).toHaveProperty('message');
     expect(res.body).toHaveProperty('payload');
