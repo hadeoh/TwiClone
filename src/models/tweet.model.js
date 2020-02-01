@@ -12,6 +12,10 @@ const TweetSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
+    },
+    replies: {
+      type: Number,
+      default: 0
     }
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
@@ -21,7 +25,11 @@ const TweetSchema = new Schema(
  * Methods
  */
 TweetSchema.methods = {
-  toJSON() {}
+  toJSON() {
+    const { _id, __v, ...rest } = this.toObject();
+    const tweet = { ...rest, id: _id };
+    return tweet;
+  }
 };
 
 /**
