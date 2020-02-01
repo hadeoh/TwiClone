@@ -21,7 +21,17 @@ const userValidation = {
         .required(),
       confirmPassword: Joi.string().required()
     }
-  }
+  },
+
+  // POST /api/v1/auth/login
+  login: {
+    body: {
+      email: Joi.string(),
+      phone: Joi.string(),
+      userName: Joi.string(),
+      password: Joi.string().required()
+    }
+  },
 };
 
 export default userValidation;
