@@ -1,4 +1,4 @@
-import User from '../../models/user.model';
+import User from '../models/user.model';
 
 describe('User model', () => {
   test('full name, user name and password must be required', async () => {
