@@ -1,6 +1,7 @@
 /**
  * third party libraries
  */
+import '@babel/polyfill';
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
@@ -26,8 +27,8 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 
 // parsing the request body
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // enable detailed API logging in dev env
 if (config.env === 'development') {
