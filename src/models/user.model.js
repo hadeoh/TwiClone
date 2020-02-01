@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import config from '../config';
 import { hashPassword } from '../services/bcrypt.service';
+import TweetSchema from '../models/tweet.model';
 
 const UserSchema = new Schema(
   {

@@ -16,17 +16,21 @@ class Query {
     return this.Model.findById(payload).exec();
   }
 
-  findAll(payload) {
-    return this.Model.find(payload);
+  aggregate(payload) {
+    return this.Model.aggregate([{ $match : { item: payload } }])
   }
 
-  update({ payload, where }) {
-    return this.Model.findOneAndUpdate(where, payload, { new: true }).exec();
-  }
+  // findAll(payload) {
+  //   return this.Model.find(payload);
+  // }
 
-  delete(payload) {
-    return this.Model.findOneAndDelete(payload).exec();
-  }
+  // update({ payload, where }) {
+  //   return this.Model.findOneAndUpdate(where, payload, { new: true }).exec();
+  // }
+
+  // delete(payload) {
+  //   return this.Model.findOneAndDelete(payload).exec();
+  // }
 }
 
 export default Query
