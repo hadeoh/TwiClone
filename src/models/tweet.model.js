@@ -9,14 +9,25 @@ const TweetSchema = new Schema(
       maxlength: 500,
       required: true
     },
-    userId: {
+    postedBy: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    replies: {
+    numberOfReplies: {
       type: Number,
       default: 0
-    }
+    },
+    replies: [{
+      body: String,
+      postedBy: {
+          type: Schema.Types.ObjectId,
+          ref: 'User'
+      },
+      timeReplied: {
+        type: Date,
+        default: null
+      }
+  }]
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
