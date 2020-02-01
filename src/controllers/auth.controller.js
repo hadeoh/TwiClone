@@ -6,7 +6,7 @@ import * as authService from '../services/auth.service';
 
 export const signUp = async (req, res, next) => {
   try {
-    const { fullName, email, phone, userName, password } = req.body;
+    const { fullName, email, phone, userName, password, location, website } = req.body;
 
     const userExist = await UserQuery.findOne({ $or: [{ phone }, { email }, { userName }] });
 
@@ -22,8 +22,10 @@ export const signUp = async (req, res, next) => {
       fullName,
       email,
       phone,
+      userName,
       password,
-      userName
+      location,
+      website
     });
 
     return res

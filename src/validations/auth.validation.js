@@ -15,6 +15,8 @@ const userValidation = {
         .email()
         .max(200),
       phone: Joi.string().max(200),
+      location: Joi.string(),
+      website: Joi.string(),
       password: Joi.string()
         .min(6)
         .max(255)

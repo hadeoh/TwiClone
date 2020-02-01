@@ -12,6 +12,10 @@ class Query {
     return this.Model.findOne(payload).exec();
   }
 
+  findById(payload) {
+    return this.Model.findById(payload).exec();
+  }
+
   findAll(payload) {
     return this.Model.find(payload);
   }

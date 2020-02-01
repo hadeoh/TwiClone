@@ -1,6 +1,6 @@
 import { Joi } from 'celebrate';
 
-const userValidation = {
+const tweetValidation = {
   // POST /api/v1/tweet/post
   postTweet: {
     body: {
@@ -10,6 +10,13 @@ const userValidation = {
       userId: Joi.number()
     }
   },
+  tweetReply: {
+    body: {
+      body: Joi.string()
+        .max(500)
+        .required()
+    }
+  },
 };
 
-export default userValidation;
+export default tweetValidation;
