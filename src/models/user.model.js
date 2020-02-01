@@ -49,14 +49,27 @@ const UserSchema = new Schema(
       required: true,
       default: config.avatar
     },
-    followers: {
+    location: {
+      type: String,
+      default: null,
+      trim: true
+    },
+    website: {
+      type: String,
+      default: null,
+      trim: true
+    },
+    numberOfFollowers: {
       type: Number,
       default: 0
     },
-    following: {
+    numberOfFollowing: {
       type: Number,
       default: 0
-    }
+    },
+    followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    tweets: [{ type: Schema.Types.ObjectId, ref: 'Tweet' }]
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
