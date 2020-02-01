@@ -1,4 +1,4 @@
-import Following from '../../models/following.model';
+import Following from '../models/following.model';
 
 describe('Following model', () => {
   test('User id and follower id should be referenced', async () => {
