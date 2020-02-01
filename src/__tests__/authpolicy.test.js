@@ -1,4 +1,4 @@
-import { auth as Auth} from '../auth.policy'
+import { auth as Auth} from '../policies/auth.policy'
 
 describe('Auth Policy', () => {
   test('Token must be provided', async () => {
