@@ -3,7 +3,7 @@
  * @property {Array} arr - Array of Joi validation errors.
  * @returns {Object}
  */
-const customErrorMessage = errors => {
+const JoiErrorFormatter = errors => {
   return errors.reduce((errMessage, { path, message }) => {
     let [key] = path;
     if (!errMessage[key]) {
@@ -13,4 +13,4 @@ const customErrorMessage = errors => {
   }, {});
 };
 
-export default customErrorMessage;
+export default JoiErrorFormatter;
