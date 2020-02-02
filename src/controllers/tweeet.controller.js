@@ -16,14 +16,6 @@ export const postTweet = async (req, res, next) => {
 
     user.save();
 
-    if (!tweet) {
-      return res.status(httpStatus.UNPROCESSABLE_ENTITY).json(
-        sendResponse(httpStatus.UNPROCESSABLE_ENTITY, 'Unable to post tweet', null, {
-          error: 'Unable to post tweet'
-        })
-      );
-    }
-
     return res
       .status(httpStatus.CREATED)
       .json(sendResponse(httpStatus.CREATED, 'success', tweet, null));
@@ -50,7 +42,7 @@ export const replyTweet = async (req, res, next) => {
       personWhoReplied.tweets.push(newTweet);
 
       await personWhoReplied.save();
-      
+
       tweet.numberOfReplies += 1;
 
       tweet.replies.push({ body, postedBy: userId, timeReplied: Date.now() });
