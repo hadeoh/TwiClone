@@ -40,7 +40,9 @@ export const login = async (req, res, next) => {
   try {
     const { email, phone, userName, password } = req.body;
 
-    let user = await UserQuery.findOne({ $or: [{ phone }, { email }, { userName }] });
+    let user = await UserQuery.findOne({
+      $or: [{ phone: phone }, { email: email }, { userName: userName }]
+    });
 
     if (!user) {
       return res.status(httpStatus.NOT_FOUND).json(

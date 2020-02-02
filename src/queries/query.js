@@ -9,7 +9,7 @@ class Query {
   }
 
   findOne(payload) {
-    return this.Model.findOne(payload).exec();
+    return this.Model.findOne(payload)
   }
 
   findById(payload) {
@@ -17,12 +17,12 @@ class Query {
   }
 
   aggregate(payload) {
-    return this.Model.aggregate([{ $match : { item: payload } }])
+    return this.Model.aggregate(payload)
   }
 
-  // findAll(payload) {
-  //   return this.Model.find(payload);
-  // }
+  findAll(payload) {
+    return this.Model.find(payload);
+  }
 
   // update({ payload, where }) {
   //   return this.Model.findOneAndUpdate(where, payload, { new: true }).exec();

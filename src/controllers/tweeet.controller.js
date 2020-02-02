@@ -14,7 +14,7 @@ export const postTweet = async (req, res, next) => {
 
     user.tweets.push(tweet);
 
-    user.save();
+    await user.save();
 
     return res
       .status(httpStatus.CREATED)
@@ -41,13 +41,11 @@ export const replyTweet = async (req, res, next) => {
 
       personWhoReplied.tweets.push(newTweet);
 
-      await personWhoReplied.save();
-
       tweet.numberOfReplies += 1;
 
       tweet.replies.push({ body, postedBy: userId, timeReplied: Date.now() });
 
-      await tweet.save();
+      await Promise.all([personWhoReplied.save(), tweet.save()]);
 
       const user = await UserQuery.findById(tweet.postedBy);
 

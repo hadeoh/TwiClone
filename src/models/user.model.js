@@ -34,6 +34,7 @@ const UserSchema = new Schema(
     },
     userName: {
       type: String,
+      index: true,
       unique: true,
       lowercase: true,
       trim: true,
@@ -75,6 +76,7 @@ const UserSchema = new Schema(
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
+UserSchema.index({email:1}, {phone:1}, {userName:1});
 /**
  * pre-save hooks
  */
