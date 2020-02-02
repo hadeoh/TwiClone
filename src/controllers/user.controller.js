@@ -72,29 +72,19 @@ export const viewOwnTimeline = async (req, res, next) => {
 
     const ownUser = await UserQuery.findById(ownId);
 
-    const result = [];
-
-    for (const followingId of ownUser.following) {
-      const followingTweets = await TweetQuery.findOne({ postedBy: followingId })
-        .populate({ path: 'postedBy', select: 'fullName userName avatar' })
-        .populate({ path: 'replies.postedBy', select: 'fullName userName avatar' })
-        .exec();
-      result.push(followingTweets);
-    }
-
-    const ownUserTweets = await TweetQuery.findOne({ postedBy: req.token.id })
+    const query = [...ownUser.following, req.token.id];
+    const allTweets = await TweetQuery.findAll({ postedBy: { $in: query } })
       .populate({ path: 'postedBy', select: 'fullName userName avatar' })
       .populate({ path: 'replies.postedBy', select: 'fullName userName avatar' })
       .exec();
-    result.push(ownUserTweets);
-    result.sort((a, b) => b.createdAt - a.createdAt);
+
     const { id, avatar, userName, numberOfFollowers, numberOfFollowing } = req.token;
 
-    result.unshift({ id, avatar, userName, numberOfFollowers, numberOfFollowing });
+    allTweets.unshift({ id, avatar, userName, numberOfFollowers, numberOfFollowing });
 
     return res
       .status(httpStatus.OK)
-      .json(sendResponse(httpStatus.OK, 'Here are your tweets', result, null));
+      .json(sendResponse(httpStatus.OK, 'Here are your tweets', allTweets, null));
   } catch (err) {
     next(err);
   }
