@@ -13,7 +13,7 @@ export const signUp = async (req, res, next) => {
     if (userExist) {
       return res.status(httpStatus.BAD_REQUEST).json(
         sendResponse(httpStatus.BAD_REQUEST, 'invalid credentials', null, {
-          email: 'email has been taken'
+          email: 'email/username/phone has been taken'
         })
       );
     }
