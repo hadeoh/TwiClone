@@ -30,6 +30,7 @@ export const followUser = async (req, res, next) => {
     }
 
     const userToFollow = await UserQuery.findById(userId);
+    
 
     if (userToFollow) {
       userToFollow.numberOfFollowers += 1;
