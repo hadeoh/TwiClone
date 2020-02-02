@@ -16,7 +16,6 @@ const connectDB = async () => {
 /** * Drop database, close the connection and stop mongodb. */
 const closeDatabase = async () => {
   await mongoose.connection.dropDatabase();
-  await mongoose.connection.close();
 };
 
 /** * Remove all the data for all db collections. */
@@ -30,12 +29,12 @@ const clearDatabase = async () => {
 
 /** * Connect to a new in-memory database before running any tests. */
 
-beforeAll(async () => await connectDB());
+beforeAll(connectDB);
 
 /** * Clear all test data after every test. */
 
-afterEach(async () => await clearDatabase());
+afterEach(clearDatabase);
 
 /** * Remove and close the db and server. */
 
-afterAll(async () => await closeDatabase());
+afterAll(closeDatabase);

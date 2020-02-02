@@ -1,5 +1,6 @@
+import '@babel/polyfill';
 import request from 'supertest';
-import app from '../routes/index';
+import app from '../routes/index'; 
 
 describe('Sign Up route', () => {
   it('should create a new user', async () => {
