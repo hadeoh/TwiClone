@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:prod": "babel-node index.js",
+    "start": "babel-node index.js",
     "start:dev": "nodemon --exec babel-node index.js",
     "test": "cross-env NODE_ENV=test && jest --runInBand --verbose --detectOpenHandles --forceExit",
     "test:watch": "yarn test --watch",
@@ -45,12 +45,15 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "http-status": "^1.4.2",
+    "istanbul": "^0.4.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.10"
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./jest.setup.js"],
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ],
     "restoreMocks": true
   }
 }
