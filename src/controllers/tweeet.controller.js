@@ -12,7 +12,7 @@ export const postTweet = async (req, res, next) => {
 
     const user = await UserQuery.findById(userId);
 
-    user.tweets.push(tweet._id);
+    user.tweets.push(tweet);
 
     user.save();
 
@@ -43,13 +43,21 @@ export const replyTweet = async (req, res, next) => {
     const tweet = await TweetQuery.findById(tweetId);
 
     if (tweet) {
+      const newTweet = await TweetQuery.create({ body, postedBy: userId });
+
+      const personWhoReplied = await UserQuery.findById(userId);
+
+      personWhoReplied.tweets.push(newTweet);
+
+      await personWhoReplied.save();
+      
       tweet.numberOfReplies += 1;
 
       tweet.replies.push({ body, postedBy: userId, timeReplied: Date.now() });
 
-      tweet.save();
+      await tweet.save();
 
-      const user = await UserQuery.findById(tweet.postedBy);      
+      const user = await UserQuery.findById(tweet.postedBy);
 
       const tweetObj = await TweetQuery.findById(tweetId);
 
