@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import { UserQuery } from '../queries';
+import { UserQuery, TweetQuery } from '../queries';
 import sendResponse from '../helpers/response';
 import mongoose from 'mongoose';
 
@@ -19,7 +19,7 @@ export const followUser = async (req, res, next) => {
       );
     }
 
-    const alreadyFollowing = follower.following.some(item => item == userId)
+    const alreadyFollowing = follower.following.some(item => item == userId);
 
     if (alreadyFollowing) {
       return res.status(httpStatus.CONFLICT).json(
@@ -30,7 +30,6 @@ export const followUser = async (req, res, next) => {
     }
 
     const userToFollow = await UserQuery.findById(userId);
-    
 
     if (userToFollow) {
       userToFollow.numberOfFollowers += 1;
@@ -41,8 +40,7 @@ export const followUser = async (req, res, next) => {
 
       follower.following.push(userId);
 
-      await userToFollow.save();
-      await follower.save();
+      await Promise.all([userToFollow.save(), follower.save()]);
 
       const user = await UserQuery.findById(userId);
 
@@ -63,6 +61,40 @@ export const followUser = async (req, res, next) => {
         error: 'User not found'
       })
     );
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const viewOwnTimeline = async (req, res, next) => {
+  try {
+    const ownId = req.token.id;
+
+    const ownUser = await UserQuery.findById(ownId);
+
+    const result = [];
+
+    for (const followingId of ownUser.following) {
+      const followingTweets = await TweetQuery.findOne({ postedBy: followingId })
+        .populate({ path: 'postedBy', select: 'fullName userName avatar' })
+        .populate({ path: 'replies.postedBy', select: 'fullName userName avatar' })
+        .exec();
+      result.push(followingTweets);
+    }
+
+    const ownUserTweets = await TweetQuery.findOne({ postedBy: req.token.id })
+      .populate({ path: 'postedBy', select: 'fullName userName avatar' })
+      .populate({ path: 'replies.postedBy', select: 'fullName userName avatar' })
+      .exec();
+    result.push(ownUserTweets);
+    result.sort((a, b) => b.createdAt - a.createdAt);
+    const { id, avatar, userName, numberOfFollowers, numberOfFollowing } = req.token;
+
+    result.unshift({ id, avatar, userName, numberOfFollowers, numberOfFollowing });
+
+    return res
+      .status(httpStatus.OK)
+      .json(sendResponse(httpStatus.OK, 'Here are your tweets', result, null));
   } catch (err) {
     next(err);
   }
