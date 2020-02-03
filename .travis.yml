@@ -7,10 +7,10 @@ env:
   global: CODECLIMATE_REPO_TOKEN=acc1da82318456253457990011426487ca072f74715e8084b6e5bdf87531dfad
 
 install:
-  - npm install
+  - yarn
 
 test:
-  - npm test
+  - yarn test
 
 cache:
   directories:
@@ -23,10 +23,10 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - npm run coverage
+  - yarn test:coverage
 after_success:
-  - npm run coverage
-  - npm install codeclimate-test-reporter
+  - yarn test:coverage
+  - yarn add codeclimate-test-reporter
   - codeclimate-test-reporter < coverage/lcov.info
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

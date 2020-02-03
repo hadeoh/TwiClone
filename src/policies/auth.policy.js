@@ -2,7 +2,7 @@ import httpStatus from "http-status";
 import {verify} from "../services/auth.service";
 import sendResponse from "../helpers/response";
 
-export const auth = async (req, res, next) => {
+export const auth = (req, res, next) => {
   let tokenToVerify;
   const signature = req.header("Authorization");
   const content = signature ? signature.split(" ") : false;
