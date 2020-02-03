@@ -19,8 +19,7 @@ const UserSchema = new Schema(
       lowercase: true,
       trim: true,
       minlength: 5,
-      maxlength: 150,
-      default: null
+      maxlength: 150
     },
     phone: {
       type: String,
@@ -28,8 +27,7 @@ const UserSchema = new Schema(
       unique: true,
       trim: true,
       minlength: 6,
-      maxlength: 20,
-      default: null
+      maxlength: 20
     },
     userName: {
       type: String,

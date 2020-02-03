@@ -60,8 +60,6 @@ export const login = async (req, res, next) => {
       $or: [{ phone: loginParams }, { email: loginParams }, { userName: loginParams }]
     });
 
-    console.log(user);
-
     if (!user) {
       return res.status(httpStatus.NOT_FOUND).json(
         sendResponse(httpStatus.NOT_FOUND, 'User does not exist', null, {
