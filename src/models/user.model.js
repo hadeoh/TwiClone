@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 import config from '../config';
 import { hashPassword } from '../services/bcrypt.service';
-import TweetSchema from '../models/tweet.model';
 
 const UserSchema = new Schema(
   {
@@ -76,7 +75,6 @@ const UserSchema = new Schema(
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-UserSchema.index({email:1}, {phone:1}, {userName:1});
 /**
  * pre-save hooks
  */
