@@ -65,3 +65,65 @@ export const timeline = async (req, res, next) => {
     next(err);
   }
 };
+
+export const searchTweetsAndUsers = async (req, res, next) => {
+  try {
+    const { searchParams } = req.body;
+
+    const { page, limit } = req.query;
+
+    const tweets = await TweetQuery.findAll(
+      { $text: { $search: searchParams } },
+      { score: { $meta: 'textScore' } }
+    )
+      .populate([
+        {
+          path: 'user',
+          select: 'userName avatar fullName -_id'
+        },
+        {
+          path: 'replyTo',
+          populate: {
+            path: 'user',
+            select: 'userName avatar fullName -_id'
+          }
+        }
+      ])
+      .skip(+page)
+      .limit(+limit);
+
+    const users = await UserQuery.findAll(
+      { $text: { $search: searchParams } },
+      { score: { $meta: 'textScore' } }
+    )
+      .skip(+page)
+      .limit(+limit);
+
+      const result = {tweets: tweets,users: users}
+
+    // const followingIds = following.map(({ followId }) => followId);
+
+    // const parameters = [...followingIds, user];
+
+    // const tweets = await TweetQuery.findAll({ user: { $in: parameters } })
+    //   .populate([
+    //     {
+    //       path: 'user',
+    //       select: 'userName avatar fullName -_id'
+    //     },
+    //     {
+    //       path: 'replyTo',
+    //       populate: {
+    //         path: 'user',
+    //         select: 'userName avatar fullName -_id'
+    //       }
+    //     }
+    //   ])
+    //   .skip(+page)
+    //   .limit(+limit)
+    //   .sort('createdAt');
+    return res.json(sendResponse(httpStatus.OK, 'success', result, null));
+  } catch (err) {
+    next(err);
+  }
+};
