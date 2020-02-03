@@ -1,12 +1,12 @@
 import { Schema, model } from 'mongoose';
 
-const FollowingSchema = new Schema(
+const FollowSchema = new Schema(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    followingId: {
+    followerId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
@@ -17,13 +17,13 @@ const FollowingSchema = new Schema(
 /**
  * Methods
  */
-FollowingSchema.methods = {
+FollowSchema.methods = {
   toJSON() {}
 };
 
 /**
  * Statics
  */
-FollowingSchema.statics = {};
+FollowSchema.statics = {};
 
-module.exports = model('Following', FollowingSchema);
+module.exports = model('Follow', FollowSchema);

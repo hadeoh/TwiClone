@@ -1,11 +1,11 @@
-import TweetReply from '../models/tweetreply.model';
+import Tweet from '../models/tweet.model';
 
 describe('Tweet model', () => {
   test('Body must be required', async () => {
     expect.assertions(1);
 
     try {
-      await TweetReply.create({ });
+      await Tweet.create({ });
     } catch (e) {
       expect(e).toBeTruthy();
     }
@@ -14,8 +14,8 @@ describe('Tweet model', () => {
     expect.assertions(0);
 
     try {
-      await TweetReply.create({
-        body: "The boy is good"
+      await Tweet.create({
+        content: "The boy is good"
       });
     } catch (e) {
       expect(e).toBeTruthy();
