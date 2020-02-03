@@ -26,9 +26,7 @@ const userValidation = {
   // POST /api/v1/auth/login
   login: {
     body: {
-      email: Joi.string(),
-      phone: Joi.string(),
-      userName: Joi.string(),
+      loginParams: Joi.string().required(),
       password: Joi.string().required()
     }
   },

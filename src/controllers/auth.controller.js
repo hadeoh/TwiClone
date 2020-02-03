@@ -13,7 +13,7 @@ export const signUp = async (req, res, next) => {
     if (userExist) {
       return res.status(httpStatus.BAD_REQUEST).json(
         sendResponse(httpStatus.BAD_REQUEST, 'invalid credentials', null, {
-          email: 'email has been taken'
+          issue: 'email/username/phone has been taken'
         })
       );
     }
@@ -26,7 +26,7 @@ export const signUp = async (req, res, next) => {
       userName
     });
 
-    return res.json(sendResponse(httpStatus.OK, 'success', user, null));
+    return res.json(sendResponse(httpStatus.CREATED, 'success', user, null));
   } catch (err) {
     next(err);
   }
@@ -34,9 +34,9 @@ export const signUp = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const { email, phone, userName, password } = req.body;
+    const { loginParams, password } = req.body;
 
-    let user = await UserQuery.findOne({ $or: [{ phone }, { email }, { userName }] })
+    let user = await UserQuery.findOne({ $or: [{ phone: loginParams }, { email: loginParams }, { userName: loginParams }] })
 
     if (!user) {
       return res.status(httpStatus.NOT_FOUND).json(
@@ -59,7 +59,7 @@ export const login = async (req, res, next) => {
 
     return res.status(httpStatus.BAD_REQUEST).json(
       sendResponse(httpStatus.BAD_REQUEST, "invalid email/username/password or password", null, {
-        error: "invalid email/username/password or password"
+        issue: "invalid email/username/password or password"
       })
     );
   } catch (err) {
