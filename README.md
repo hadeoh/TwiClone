@@ -13,7 +13,7 @@ TwiClone is a simple project which clone twitter simply
 - User should be able to login with the combination of email/phone/username and password.
 - User should be able to post a tweet.
 - User should be able to reply a tweet and the reply should also be posted as a tweet for the user(a basic replication of twitter replies).
-- User should be able to follow other users, and a user can't follow another user twice, moreso, auser can't follow him/herself.
+- User should be able to follow other users, and a user can unfollow a followed user.
 - User should be able to view own timeline i.e tweets of the people he/she is following and also own tweets. Furthermore, a user should be able to view his picture on his/her timeline
 - User should be able to search for tweets and other users with the same keyword for searching. The repsonse is displayed based on the values matching the keyword in both collections
 

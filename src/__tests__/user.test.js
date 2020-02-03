@@ -71,8 +71,7 @@ describe('Follow user route', () => {
         confirmPassword: 'modupeola'
       });
 
-      console.log(anotherUser);
-      
+    console.log(anotherUser);
 
     const anotherUserId = anotherUser.body.payload.id;
 
@@ -97,6 +96,38 @@ describe('Follow user route', () => {
     expect(res.body).toHaveProperty('message');
     expect(res.body).toHaveProperty('payload');
     expect(res.body.payload.status).toBe('User successfully unfollowed');
+    expect(res.body.errors).toBeNull();
+  });
+});
+
+describe('Timeline route', () => {
+  let userToken;
+  it('should view own timeline', async () => {
+    await request(app)
+      .post(`${AUTH_BASE_URL}/signup`)
+      .send({
+        fullName: 'Usman Adio',
+        userName: 'hadeoh',
+        email: 'usmanadio@gmail.com',
+        password: 'modupeola',
+        confirmPassword: 'modupeola'
+      });
+    const user = await request(app)
+      .post(`${AUTH_BASE_URL}/login`)
+      .send({
+        loginParams: 'usmanadio@gmail.com',
+        password: 'modupeola'
+      });
+
+    userToken = user.body.payload.token;
+
+    const res = await request(app)
+      .get(`${USER_URL}/timeline`)
+      .set('Authorization', `Bearer ${userToken}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('statusCode');
+    expect(res.body).toHaveProperty('message');
+    expect(res.body).toHaveProperty('payload');
     expect(res.body.errors).toBeNull();
   });
 });
