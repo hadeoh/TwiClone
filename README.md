@@ -24,7 +24,7 @@ API is deployed [here](https://twiclone1960.herokuapp.com)
 
 ## API Documentation
 
-The documentation for API is [here](https://hadeoh.postman.co/collections/6841767-074f9580-32dc-47b1-966b-8a08f102856f/publish?version=latest&workspace=f9a9110e-2dc9-4f05-845e-2f4b687f3a0c#content)
+The documentation for API is [here](https://documenter.getpostman.com/view/6841767/SWTEbvxo?version=latest)
 
 ## Built with
 
