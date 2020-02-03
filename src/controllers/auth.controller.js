@@ -8,12 +8,28 @@ export const signUp = async (req, res, next) => {
   try {
     const { fullName, email, phone, userName, password, location, website } = req.body;
 
-    const userExist = await UserQuery.findOne({ $or: [{ phone }, { email }, { userName }] });
+    let userExist = false;
+    if (email) {
+      if (await UserQuery.findOne({ email })) {
+        userExist = true;
+      }
+    }
+    if (phone) {
+      if (await UserQuery.findOne({ phone })) {
+        userExist = true;
+      }
+    }
+
+    if (userName) {
+      if (await UserQuery.findOne({ userName })) {
+        userExist = true;
+      }
+    }
 
     if (userExist) {
-      return res.status(httpStatus.BAD_REQUEST).json(
-        sendResponse(httpStatus.BAD_REQUEST, 'invalid credentials', null, {
-          email: 'email/username/phone has been taken'
+      return res.status(httpStatus.CONFLICT).json(
+        sendResponse(httpStatus.CONFLICT, 'invalid credentials', null, {
+          issue: 'email/username/phone has been taken'
         })
       );
     }
@@ -38,11 +54,13 @@ export const signUp = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const { email, phone, userName, password } = req.body;
+    const { loginParams, password } = req.body;    
 
     let user = await UserQuery.findOne({
-      $or: [{ phone: phone }, { email: email }, { userName: userName }]
+      $or: [{ phone: loginParams }, { email: loginParams }, { userName: loginParams }]
     });
+
+    console.log(user);
 
     if (!user) {
       return res.status(httpStatus.NOT_FOUND).json(
