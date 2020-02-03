@@ -14,7 +14,6 @@ const UserSchema = new Schema(
     },
     email: {
       type: String,
-      index: true,
       unique: true,
       lowercase: true,
       trim: true,
@@ -24,7 +23,6 @@ const UserSchema = new Schema(
     },
     phone: {
       type: String,
-      index: true,
       unique: true,
       trim: true,
       minlength: 6,
@@ -33,6 +31,7 @@ const UserSchema = new Schema(
     },
     userName: {
       type: String,
+      index: true,
       unique: true,
       lowercase: true,
       trim: true,
