@@ -72,19 +72,29 @@ describe('Sign Up route', () => {
     expect(res.body).toHaveProperty('message');
     expect(res.body).toHaveProperty('errors');
   });
-  test('should throw error if no confirmPassword', async () => {
+  test('should throw error if user already exists', async () => {
+    await request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        fullName: 'Usman Adio',
+        userName: 'hadeoh',
+        email: 'usmanadio@gmail.com',
+        password: 'modupeola',
+        confirmPassword: 'modupeola'
+      });
     const res = await request(app)
       .post('/api/v1/auth/signup')
       .send({
         fullName: 'Usman Adio',
         userName: 'hadeoh',
         email: 'usmanadio@gmail.com',
-        password: 'modupeola'
+        password: 'modupeola',
+        confirmPassword: 'modupeola'
       });
-    expect(res.statusCode).toEqual(400);
-    expect(res.body.message).toBe('Invalid fields');
+    expect(res.statusCode).toEqual(409);
+    expect(res.body.message).toBe('invalid credentials');
     expect(res.body.payload).toBeNull();
-    expect(res.body.errors).toHaveProperty('confirmPassword');
+    expect(res.body.errors).toHaveProperty('issue');
     expect(res.body).toHaveProperty('statusCode');
     expect(res.body).toHaveProperty('message');
     expect(res.body).toHaveProperty('errors');
@@ -107,7 +117,7 @@ describe('Login route', () => {
     const res = await request(app)
     .post('/api/v1/auth/login')
     .send({
-      userName: 'hadeoh',
+      loginParams: 'hadeoh',
       password: 'modupeola'
     })
     expect(res.statusCode).toEqual(200);
@@ -140,11 +150,26 @@ describe('Login route', () => {
     const res = await request(app)
     .post('/api/v1/auth/login')
     .send({
-      userName: 'hadeoh',
+      loginParams: 'hadeoh',
       password: 'hgfh'
     })
     expect(res.statusCode).toEqual(400);
     expect(res.body.message).toBe('invalid email/username/password or password');
+    expect(res.body.errors).toBeDefined();
+    expect(res.body).toHaveProperty('statusCode');
+    expect(res.body).toHaveProperty('message');
+    expect(res.body).toHaveProperty('payload');
+    expect(res.body).toHaveProperty('errors');
+  });
+  test('should not allow a user login with wrong login param', async () => {
+    const res = await request(app)
+    .post('/api/v1/auth/login')
+    .send({
+      loginParams: 'dfdf',
+      password: 'modupeola'
+    })
+    expect(res.statusCode).toEqual(404);
+    expect(res.body.message).toBe('User does not exist');
     expect(res.body.errors).toBeDefined();
     expect(res.body).toHaveProperty('statusCode');
     expect(res.body).toHaveProperty('message');

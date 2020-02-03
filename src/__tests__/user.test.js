@@ -33,7 +33,7 @@ describe('Follow a user route', () => {
     const response = await request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'usmanadio@gmail.com',
+        loginParams: 'usmanadio@gmail.com',
         password: 'modupeola'
       });
 
@@ -129,7 +129,7 @@ describe('View own timeline', () => {
     const response = await request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'usmanadio@gmail.com',
+        loginParams: 'usmanadio@gmail.com',
         password: 'modupeola'
       });
 

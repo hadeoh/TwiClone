@@ -20,7 +20,7 @@ describe('Tweets route', () => {
     const response = await request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'fire@gmail.com',
+        loginParams: 'fire@gmail.com',
         password: 'modupeola'
       });
 
@@ -34,22 +34,6 @@ describe('Tweets route', () => {
       });
     tweetId = tweet.body.payload.id;
   });
-  // test('should tweet successfully', async () => {
-  //   const res = await request(app)
-  //     .post(`/api/v1/tweets`)
-  //     .set('Authorization', `Bearer ${userToken}`)
-  //     .send({
-  //       body: 'I love sky diving'
-  //     });
-
-  //   expect(res.statusCode).toEqual(201);
-  //   expect(res.body.message).toBe('success');
-  //   expect(res.body.errors).toBeNull();
-  //   expect(res.body).toHaveProperty('statusCode');
-  //   expect(res.body).toHaveProperty('message');
-  //   expect(res.body).toHaveProperty('payload');
-  //   expect(res.body).toHaveProperty('errors');
-  // });
   test('should not allow empty body field', async () => {
     const res = await request(app)
       .post(`/api/v1/tweets`)
@@ -82,17 +66,4 @@ describe('Tweets route', () => {
     expect(res.body).toHaveProperty('payload');
     expect(res.body).toHaveProperty('errors');
   });
-  // test('should not allow a user follow him/herself', async () => {
-  //   const res = await request(app)
-  //     .put(`/api/v1/users/${userId}/follow`)
-  //     .set('Authorization', `Bearer ${userToken}`);
-
-  //   expect(res.statusCode).toEqual(400);
-  //   expect(res.body.message).toBe('You cannot follow yourself');
-  //   expect(res.body.errors).toBeDefined();
-  //   expect(res.body).toHaveProperty('statusCode');
-  //   expect(res.body).toHaveProperty('message');
-  //   expect(res.body).toHaveProperty('payload');
-  //   expect(res.body).toHaveProperty('errors');
-  // });
 });
