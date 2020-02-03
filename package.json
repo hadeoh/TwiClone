@@ -33,7 +33,6 @@
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
-    "morgan": "^1.9.1",
     "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
@@ -47,7 +46,8 @@
     "express": "^4.17.1",
     "http-status": "^1.4.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.10"
+    "mongoose": "^5.8.10",
+    "morgan": "^1.9.1"
   },
   "jest": {
     "testEnvironment": "node",
