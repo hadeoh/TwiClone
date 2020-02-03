@@ -26,7 +26,11 @@ const TweetSchema = new Schema(
  * Methods
  */
 TweetSchema.methods = {
-  toJSON() {}
+  toJSON() {
+    const { _id, __v, ...rest } = this.toObject();
+    const tweet = { ...rest, id: _id };
+    return tweet;
+  }
 };
 
 /**
