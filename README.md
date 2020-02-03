@@ -6,9 +6,10 @@ TwiClone is a simple project which clone twitter simply
 
 ## Brief Description
 
-- There are two collections for this project which are the User and Tweet collections.
-- A user model contains the user details and is tied to all the followers, those follwing and tweets for that particular user.
+- There are three collections for this project which are the User, Tweet and Follow collections.
+- A user model contains the user details.
 - A tweet model contains the tweet details and the replies to the tweets.
+- A follower model contains the list of followers and those who were followed.
 - User should be able to sign up with the username compulsory to be filled during registration.
 - User should be able to login with the combination of email/phone/username and password.
 - User should be able to post a tweet.
@@ -23,7 +24,7 @@ API is deployed [here](https://twiclone1960.herokuapp.com)
 
 ## API Documentation
 
-The documentation for API is [here](https://quickfoodvp.postman.co/collections/6841767-074f9580-32dc-47b1-966b-8a08f102856f?version=latest&workspace=f9a9110e-2dc9-4f05-845e-2f4b687f3a0c)
+The documentation for API is [here](https://hadeoh.postman.co/collections/6841767-074f9580-32dc-47b1-966b-8a08f102856f/publish?version=latest&workspace=f9a9110e-2dc9-4f05-845e-2f4b687f3a0c#content)
 
 ## Built with
 
