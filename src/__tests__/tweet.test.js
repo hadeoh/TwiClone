@@ -1,24 +1,40 @@
-import Tweet from '../models/tweet.model';
+import request from 'supertest';
+import app from '../app';
 
-describe('Tweet model', () => {
-  test('Body must be required', async () => {
-    expect.assertions(1);
+const AUTH_BASE_URL = '/api/v1/auth';
+const TWEET_BASE_URL = '/api/v1/tweets';
 
-    try {
-      await Tweet.create({ });
-    } catch (e) {
-      expect(e).toBeTruthy();
-    }
-  });
-  test('Body must be string', async () => {
-    expect.assertions(0);
-
-    try {
-      await Tweet.create({
-        content: "The boy is good"
+describe('Tweets route', () => {
+  let userToken;
+  it('should create a new tweet', async () => {
+    await request(app)
+      .post(`${AUTH_BASE_URL}/signup`)
+      .send({
+        fullName: 'Usman Adio',
+        userName: 'hadeoh',
+        email: 'usmanadio@gmail.com',
+        password: 'modupeola',
+        confirmPassword: 'modupeola'
       });
-    } catch (e) {
-      expect(e).toBeTruthy();
-    }
+    const user = await request(app)
+      .post(`${AUTH_BASE_URL}/login`)
+      .send({
+        loginParams: 'usmanadio@gmail.com',
+        password: 'modupeola'
+      });
+
+    userToken = user.body.payload.token;
+
+    const res = await request(app).post(`${TWEET_BASE_URL}`)
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        content: 'I am here'
+      });
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('statusCode');
+    expect(res.body).toHaveProperty('message');
+    expect(res.body).toHaveProperty('payload');
+    expect(res.body.errors).toBeNull();
   });
 });
