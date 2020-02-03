@@ -15,3 +15,19 @@ export const postTweet = async (req, res, next) => {
     next(err);
   }
 };
+
+export const replyTweet = async (req, res, next) => {
+  try {
+    const { content } = req.body;
+
+    const { id: user } = req.token;
+
+    const { tweetId: replyTo } = req.params;    
+
+    const tweet = await TweetQuery.create({ content, user, replyTo });
+
+    return res.json(sendResponse(httpStatus.CREATED, 'success', tweet, null));
+  } catch (err) {
+    next(err);
+  }
+};

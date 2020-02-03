@@ -12,4 +12,8 @@ router
   .route('/')
   .post(validate(tweetValidation.postTweet, { abortEarly: false }), tweetController.postTweet);
 
+router
+  .route('/reply/:tweetId')
+  .post(validate(tweetValidation.postTweet, { abortEarly: false }), tweetController.replyTweet);
+
 export default router;
