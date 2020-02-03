@@ -19,7 +19,6 @@ const UserSchema = new Schema(
       trim: true,
       minlength: 5,
       maxlength: 150,
-      default: null
     },
     phone: {
       type: String,
@@ -27,7 +26,6 @@ const UserSchema = new Schema(
       trim: true,
       minlength: 6,
       maxlength: 20,
-      default: null
     },
     userName: {
       type: String,

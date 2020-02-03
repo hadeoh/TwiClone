@@ -6,7 +6,7 @@ const FollowSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    followerId: {
+    followId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
@@ -18,7 +18,11 @@ const FollowSchema = new Schema(
  * Methods
  */
 FollowSchema.methods = {
-  toJSON() {}
+  toJSON() {
+    const { _id, __v, ...rest } = this.toObject();
+    const follow = { ...rest, id: _id };
+    return follow;
+  }
 };
 
 /**
