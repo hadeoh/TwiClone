@@ -31,7 +31,7 @@ mongoose.connection.on('connected', () => {
 });
 
 //opens a port if the envirnoment is not test
-if (config.env === 'development') {
+if (config.env !== 'test') {
   // listen on port config.port
   server.listen(config.port, () => {
     console.info(`server started on port ${config.port} (${config.env})`);
