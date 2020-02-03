@@ -15,7 +15,7 @@ describe('Tweet model', () => {
 
     try {
       await Tweet.create({
-        body: "The boy is good"
+        content: "The boy is good"
       });
     } catch (e) {
       expect(e).toBeTruthy();
