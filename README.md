@@ -23,7 +23,7 @@ API is deployed [here](https://twiclone1960.herokuapp.com)
 
 ## API Documentation
 
-The documentation for API is [here](https://quickfoodvp.postman.co/collections/6841767-571d581f-df6c-4510-83aa-ea4d8bc5ffa4?version=latest&workspace=f9a9110e-2dc9-4f05-845e-2f4b687f3a0c)
+The documentation for API is [here](https://quickfoodvp.postman.co/collections/6841767-074f9580-32dc-47b1-966b-8a08f102856f?version=latest&workspace=f9a9110e-2dc9-4f05-845e-2f4b687f3a0c)
 
 ## Built with
 
