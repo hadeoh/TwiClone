@@ -22,6 +22,8 @@ const TweetSchema = new Schema(
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
+TweetSchema.index({ 'content': 'text'})
+
 /**
  * Methods
  */

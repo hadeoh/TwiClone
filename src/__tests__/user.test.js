@@ -71,8 +71,6 @@ describe('Follow user route', () => {
         confirmPassword: 'modupeola'
       });
 
-    console.log(anotherUser);
-
     const anotherUserId = anotherUser.body.payload.id;
 
     const user = await request(app)
@@ -124,6 +122,43 @@ describe('Timeline route', () => {
     const res = await request(app)
       .get(`${USER_URL}/timeline`)
       .set('Authorization', `Bearer ${userToken}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('statusCode');
+    expect(res.body).toHaveProperty('message');
+    expect(res.body).toHaveProperty('payload');
+    expect(res.body.errors).toBeNull();
+  });
+});
+
+describe('Search route', () => {
+  let userToken;
+  it('should search for tweets and users', async () => {
+    await request(app)
+      .post(`${AUTH_BASE_URL}/signup`)
+      .send({
+        fullName: 'Usman Adio',
+        userName: 'hadeoh',
+        email: 'usmanadio@gmail.com',
+        password: 'modupeola',
+        confirmPassword: 'modupeola'
+      });
+    const user = await request(app)
+      .post(`${AUTH_BASE_URL}/login`)
+      .send({
+        loginParams: 'usmanadio@gmail.com',
+        password: 'modupeola'
+      });
+
+    userToken = user.body.payload.token;
+
+    const res = await request(app)
+      .get(`${USER_URL}/searchTweetsAndUsers`)
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        searchParams: 'hi'
+      });
+    console.log(res);
+
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('statusCode');
     expect(res.body).toHaveProperty('message');

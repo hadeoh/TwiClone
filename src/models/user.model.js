@@ -58,6 +58,8 @@ const UserSchema = new Schema(
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
+UserSchema.index({userName: 'text', fullName: 'text'})
+
 /**
  * pre-save hooks
  */
