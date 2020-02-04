@@ -20,9 +20,9 @@ class Query {
     return this.Model.findOneAndUpdate(where, payload, { new: true }).exec();
   }
 
-  delete(payload) {
-    return this.Model.findOneAndDelete(payload).exec();
+  delete(payload, cacheOptions) {
+    return this.Model.deleteOne(payload, cacheOptions).exec();
   }
 }
 
-export default Query
+export default Query;

@@ -12,5 +12,8 @@ router
   .route('/follow/:followId')
   .post(validate(userValidation.followUser, { abortEarly: false }), userController.followUser);
 
+router
+  .route('/timeline')
+  .get(userController.timeline);
 
 export default router;
